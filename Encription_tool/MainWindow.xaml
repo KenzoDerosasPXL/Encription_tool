@@ -1,0 +1,218 @@
+﻿<Window x:Name="window" x:Class="Encription_tool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Background="#12354b" Height="720" Width="1080" MinHeight="720" MinWidth="1080" WindowStartupLocation="CenterScreen" WindowState="Normal" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+    <DockPanel MaxWidth="{Binding ActualWidth, ElementName=window, Mode=OneWay}">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Saving folders">
+                <MenuItem x:Name="btnSelectAESKeyFolder" Header="Choose folder for AES keys" Click="btnSelectAESKeyFolder_Click"></MenuItem>
+                <MenuItem x:Name="btnSelectEncryptedAESKeyFolder" Header="Choose folder for encrypted AES keys" Click="btnSelectEncryptedAESKeyFolder_Click"></MenuItem>
+                <MenuItem x:Name="btnSelectRSAKeyFolder" Header="Choose folder for RSA keys" Click="btnSelectRSAKeyFolder_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl>
+            <TabItem Header="Generate keys">
+                <Grid Background="#12354b" x:Name="grKeyGenerator" Visibility="Visible" Width="{Binding ActualWidth, ElementName=window, Mode=OneWay}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="107*"></ColumnDefinition>
+                        <ColumnDefinition Width="434*" />
+                        <ColumnDefinition Width="540*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center">
+                        <Label Foreground="White" Content="Key file name" FontSize="20" FontFamily="Fonts/#Roboto" HorizontalAlignment="Center"></Label>
+                        <TextBox VerticalContentAlignment="Center" x:Name="txtKeyFileName" TextWrapping="Wrap" Height="50" Width="200" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Width="400" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="70,329,0,0" Grid.RowSpan="2">
+                        <Button FontFamily="Fonts/#Roboto" BorderThickness="0" x:Name="btnAESGenerateKey" Foreground="White" FontWeight="SemiBold" Background="#30b389" Content="Generate AES key" Click="btnAESGenerateKey_Click" Margin="2" Height="40" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Width="400" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,329,0,0" Grid.RowSpan="2">
+                        <Button FontFamily="Fonts/#Roboto" BorderThickness="0" x:Name="btnRSAGenerateKey" Foreground="White" FontWeight="SemiBold" Background="#30b389" Content="Generate RSA keys" Click="btnRSAGenerateKey_Click" Margin="2" Height="40" />
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="AES">
+                <Grid x:Name="grAESEncryption" Visibility="Visible" Width="{Binding ActualWidth, ElementName=window, Mode=OneWay}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="131*"></ColumnDefinition>
+                        <ColumnDefinition Width="409*"/>
+                        <ColumnDefinition Width="540*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="380"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                            <Grid Background="#12354b" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="360"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="20">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Margin="0 50 0 0">
+                                            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="4" Width="400">
+                                                <Image x:Name="imgAES" Stretch="UniformToFill" Height="230" />
+                                            </Border>
+
+                                            <Button Margin="0 7 0 0" BorderThickness="1" BorderBrush="Black" Background="#30b389" FontSize="12" Foreground="White" FontWeight="SemiBold" Content="Load image" x:Name="btnLoadImage" Click="btnLoadImage_Click" Height="25" Width="120">
+                                                <Button.Resources>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="CornerRadius" Value="3" />
+                                                    </Style>
+                                                </Button.Resources>
+                                            </Button>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Margin="30">
+                                            <Label FontFamily="Fonts/#Roboto" FontSize="16" Foreground="White" Content="Encrypted image"></Label>
+                                            <TextBox x:Name="txtEncryptedImageAES" TextWrapping="Wrap" Height="170" />
+                                            <Button Margin="0 7 0 0" BorderThickness="1" BorderBrush="Black" Background="#30b389" FontSize="12" Foreground="White" FontWeight="SemiBold" Content="Load Ciphertext" x:Name="btnLoadCiphertext" Click="btnLoadCiphertext_Click" Height="25" Width="120">
+                                                <Button.Resources>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="CornerRadius" Value="3" />
+                                                    </Style>
+                                                </Button.Resources>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Column="0" Grid.Row="1" Width="300" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Height="25" HorizontalAlignment="Center" Margin="0 0 0 8">
+                                        <TextBlock Foreground="White" FontFamily="Fonts/#Roboto" Text="File Name" VerticalAlignment="Center" Margin="0 0 15 0" />
+                                        <TextBox Width="150" x:Name="txtImageFileName" />
+                                    </StackPanel>
+                                    <Button Foreground="White" FontFamily="Fonts/#Roboto" BorderThickness="1" BorderBrush="Black" Background="#30b389" x:Name="btnAESImageEncrypt" Content="AES encrypt" Click="btnAESImageEncrypt_Click" Margin="2" Height="40">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="3" />
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                    <Button Foreground="White" FontFamily="Fonts/#Roboto" BorderThickness="1" BorderBrush="Black" Background="#30b389" x:Name="btnAESImageDecrypt" Content="AES decrypt" Click="btnAESImageDecrypt_Click" Margin="2" Height="40">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="3" />
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                    <Button Foreground="White" FontFamily="Fonts/#Roboto" BorderThickness="1" BorderBrush="Black" Background="#30b389" x:Name="btnSaveEncryptedImage" Click="btnSaveEncryptedImage_Click"  Content="Save Encrypted"  Margin="2" Height="40">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="3" />
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                    <Button Foreground="White" FontFamily="Fonts/#Roboto" BorderThickness="1" BorderBrush="Black" Background="#30b389" Content="Save Image" x:Name="btnSavePlainImage" Click="btnSavePlainImage_Click" Margin="2" Height="40">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="3" />
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                       
+                    <StackPanel Grid.Column="2" Grid.Row="1">
+                        <Label FontFamily="Fonts/#Roboto" FontSize="16" Foreground="White" Content="AES Keys"></Label>
+                        <ListBox x:Name="lstbAESKey" MaxHeight="260"></ListBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="RSA">
+                <Grid Background="#12354b" x:Name="grRSAEncryption" Visibility="Visible" Width="{Binding ActualWidth, ElementName=window, Mode=OneWay}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="360"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Margin="10 0 10 0">
+                            <Label FontFamily="Fonts/#Roboto" FontSize="16" Foreground="White" Content="AES Keys" Width="150" HorizontalContentAlignment="Center" />
+                            <ListBox x:Name="lstbAESKeys" MaxHeight="500"></ListBox>
+                        </StackPanel>
+                        <StackPanel Margin="10 0 10 0" Grid.Column="1">
+                            <Label FontFamily="Fonts/#Roboto" FontSize="16" Foreground="White" Content="Encrypted AES Keys" Width="150" HorizontalContentAlignment="Center" />
+                            <ListBox x:Name="lstbEncryptedAESKeys" MaxHeight="260"></ListBox>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Row="1" Width="400" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Height="25" HorizontalAlignment="Center" Margin="0 0 0 8"/>
+                        <Button Foreground="White" FontFamily="Fonts/#Roboto" BorderThickness="1" BorderBrush="Black" Background="#30b389" x:Name="btnRSAEncrypt" Content="RSA encrypt" Click="btnRSAEncrypt_Click" Margin="2" Height="40" >
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                        <Button Foreground="White" FontFamily="Fonts/#Roboto" BorderThickness="1" BorderBrush="Black" Background="#30b389" x:Name="btnRSADecrypt" Content="RSA decrypt" Click="btnRSADecrypt_Click" Margin="2" Height="40" >
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="0 0 0 50" Grid.ColumnSpan="2">
+                        <StackPanel Width="240" Margin="0 0 10 0">
+                            <Label FontFamily="Fonts/#Roboto" FontSize="16" Foreground="White" Content="Public Keys" />
+                            <ListBox x:Name="lstbRSAPublicKey" MaxHeight="260"></ListBox>
+                        </StackPanel>
+                        <StackPanel>
+                            <Label FontFamily="Fonts/#Roboto" FontSize="16" Foreground="White" Content="Private Keys" Width="240" />
+                            <ListBox x:Name="lstbRSAPrivateKey" MaxHeight="260"></ListBox>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <!--<Grid x:Name="grSelectFolder" Visibility="Collapsed" Width="{Binding ActualWidth, ElementName=window, Mode=OneWay}">
+            <Button x:Name="btnSelectFolder" Content="Selecteer folder voor keys" HorizontalAlignment="Center" VerticalAlignment="Center" Height="181" Width="332" Click="btnSelectFolder_Click" />
+        </Grid>-->
+        <!--<Grid x:Name="grEncryption" Visibility="Visible" Width="{Binding ActualWidth, ElementName=window, Mode=OneWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
+                <TextBox x:Name="PlainText" TextWrapping="Wrap" Height="170" />
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1" Width="400" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Button x:Name="btnAESGenerateKey" Content="Generate AES key" Click="btnAESGenerateKey_Click" Margin="2" Height="40" />
+                <Button x:Name="btnAESEncrypt" Content="AES encrypt" Click="btnAESEncrypt_Click" Margin="2" Height="40" />
+                <Button x:Name="btnAESDecrypt" Content="AES decrypt" Click="btnAESDecrypt_Click" Margin="2" Height="40" />
+                <ListBox x:Name="lstbAESKey" MaxHeight="400"></ListBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <Button x:Name="btnRSAEncrypt" Content="RSA" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnRSAEncrypt_Click" />
+            </StackPanel>
+        </Grid>-->
+    </DockPanel>
+</Window>
